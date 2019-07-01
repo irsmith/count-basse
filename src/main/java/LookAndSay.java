@@ -1,8 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * File Name: LookAndSay.java
  * LookAndSay concrete class
@@ -41,7 +36,7 @@ class LookAndSay extends LookAndSayBase{
 		int i = 0;
 		char cur;
 		int qty = 1;
-		// start at index 0 and look ahead to next index unless end of string.  End of string is i+1 == length
+		// start at index 0 and look ahead to next index unless end of string. 
 		while (i<s.length()) {
 			cur = s.charAt(i);
 
@@ -61,25 +56,10 @@ class LookAndSay extends LookAndSayBase{
 
 	}
 
-
-	// given index of look-and-say sequence, return its value
-	//https://en.wikipedia.org/wiki/Look-and-say_sequence
-	private Map<Integer, String> dp = new HashMap<>( );
-
-	private Integer maxCache = null;
-
-
-	// input range, 0 to INTEGER MAX
 	private String alg(int n) {
 		long start = System.currentTimeMillis();
 		if (n ==  0 || n == 1) {
-			dp.put(n,"1");
 			return "1";
-		}
-
-		//value is available in the cache
-		if (dp.get(n) != null) {
-			return dp.get(n);
 		}
 
 		// calc value from maxCache to n
@@ -88,10 +68,8 @@ class LookAndSay extends LookAndSayBase{
 
 			cur = alg(cur);
 			u.myassert(cur != null);
-			dp.put(i, cur);
-
 		}
-		System.out.println(String.format("n:%d time:%s", n, System.currentTimeMillis() - start));
+		//System.out.println(String.format("n:%d time:%s", n, System.currentTimeMillis() - start));
 		return cur;
 	}
 
