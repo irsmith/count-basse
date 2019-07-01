@@ -39,52 +39,52 @@ abstract class LookAndSayBase{
             String s = lookAndSay(n) ;
             u.myassert(s.equals(e));
         }
-//        {
-//            String n = "9876543210" ;
-//            String e = "19181716151413121110" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
+        {
+            String n = "9876543210" ;
+            String e = "19181716151413121110" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
 
     }
 
     private void testn() {
-//        {
-//            int n = 1 ;
-//            String e = "1" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
-//        {
-//            int n = 2 ;
-//            String e = "11" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
-//        {
-//            int n = 3 ;
-//            String e = "21" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
-//        {
-//            int n = 4 ;
-//            String e = "1211" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
-//        {
-//            int n = 5 ;
-//            String e = "111221" ;
-//            String s = lookAndSay(n) ;
-//            u.myassert(s.equals(e));
-//        }
-//        for (int n = 1; n < 32; ++n) {
-//            String s = lookAndSay(n) ;
-//            System.out.println("n = " + n + " Length = " + s.length()) ;
-//            System.out.println("n = " + n + " " + s) ;
-//            System.out.println() ;
-//        }
+        {
+            int n = 1 ;
+            String e = "1" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
+        {
+            int n = 2 ;
+            String e = "11" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
+        {
+            int n = 3 ;
+            String e = "21" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
+        {
+            int n = 4 ;
+            String e = "1211" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
+        {
+            int n = 5 ;
+            String e = "111221" ;
+            String s = lookAndSay(n) ;
+            u.myassert(s.equals(e));
+        }
+        for (int n = 1; n < 32; ++n) {
+            String s = lookAndSay(n) ;
+            System.out.println("n = " + n + " Length = " + s.length()) ;
+            System.out.println("n = " + n + " " + s) ;
+            System.out.println() ;
+        }
     }
 
     public static void main(String[] args) {

@@ -39,7 +39,7 @@ class LookAndSay extends LookAndSayBase{
 
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
-		char cur = s.charAt(i);
+		char cur;
 		int qty = 1;
 		// start at index 0 and look ahead to next index unless end of string.  End of string is i+1 == length
 		while (i<s.length()) {
@@ -92,7 +92,7 @@ class LookAndSay extends LookAndSayBase{
 
 		}
 		System.out.println(String.format("n:%d time:%s", n, System.currentTimeMillis() - start));
-		return cur;// dp.get(n);
+		return cur;
 	}
 
 	public static void main(String[] args) {
