@@ -5,6 +5,20 @@ import java.util.List;
 
 public class RangeTest {
 
+
+    @Test
+    public void t0() {
+
+
+        int [] z = {0,0,0,1,2,3,4,5,5};
+
+        Range range = new Range();
+        int [] y = range.alg(z ,0 );
+        Assert.assertEquals(0, y[0]);
+        Assert.assertEquals(2, y[1]);
+
+    }
+
     @Test
     public void t1() {
 
@@ -36,5 +50,25 @@ public class RangeTest {
         int [] y = range.alg(z ,4 );
         Assert.assertEquals(4, y[0]);
         Assert.assertEquals(5, y[1]);
+    }
+
+    @Test
+    public void t4() {
+        int [] z = {0};
+
+        Range range = new Range();
+        int [] y = range.alg(z ,0 );
+        Assert.assertEquals(0, y[0]);
+        Assert.assertEquals(0, y[1]);
+    }
+
+    @Test
+    public void t5() {
+        int [] z = {0};
+
+        Range range = new Range();
+        int [] y = range.alg(z ,99 );
+        Assert.assertEquals(-1, y[0]);
+        Assert.assertEquals(-1, y[1]);
     }
 }

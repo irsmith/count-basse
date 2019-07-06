@@ -44,12 +44,13 @@ class Range extends RangeBase{
 	private int binsearch_it(EdgeType type, int[] a, int lo, int hi, int k) {
 
 		while (hi >= lo) {
+		    numSteps++;
             int mid = lo + ((hi - lo) / 2);
             if (a[mid] == k) {
                 switch (type) {
                     case LEFT: {
-                        if (mid - 1 == 0) {
-                            return mid;
+                        if (mid == 0) {
+                            return mid; // beginning of array
                         } else if (a[mid - 1] != k) {
                             return mid;
                         }
@@ -57,8 +58,8 @@ class Range extends RangeBase{
                         break;
                     }
                     case RIGHT: {
-                        if (mid + 1 == a.length) {
-                            return  mid;
+                        if (mid == a.length - 1) {
+                            return  mid; // end of array
                         } else if (a[mid + 1] != k) {
                             return mid;
                         }
