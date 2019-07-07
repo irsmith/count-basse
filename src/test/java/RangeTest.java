@@ -71,4 +71,18 @@ public class RangeTest {
         Assert.assertEquals(-1, y[0]);
         Assert.assertEquals(-1, y[1]);
     }
+
+    @Test
+    public void t6() {
+        int [] z = new int[500000000];
+
+        for (int i=0;i<z.length;i++) {
+            z[i]=i;
+        }
+
+        Range range = new Range();
+        int [] y = range.alg(z ,z.length-2 );
+        Assert.assertEquals(z.length-2, y[0]);
+        Assert.assertEquals(z.length-2, y[1]);
+    }
 }
