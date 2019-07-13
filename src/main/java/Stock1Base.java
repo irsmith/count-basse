@@ -53,15 +53,20 @@ abstract class Stock1Base{
   //All profit computation must go through this routine
   protected int profit(int s, int b) {
   	int l = a.length ;
-  	u.myassert(b >= 0 && b < l);
-  	u.myassert(s >= 0 && s < l && b <= s);
+  	//u.myassert(b >= 0 && b < l);
+	  if (!(b >= 0 && b < l)){
+	  	throw new IllegalArgumentException("buy-dx is wrong");
+	  }
+	  if (! (s >= 0 && s < l && b <= s)){
+	  	throw new IllegalArgumentException("sellidx is wrong");
+	  }
   	int p = a[s] - a[b] ;
   	return p ;
   }
   
   protected void testBench() {
   	basic() ;
-  	random() ;
+//  	random() ;
 	}	
   
   /*
@@ -157,18 +162,18 @@ abstract class Stock1Base{
       final int a[] = {6,5,4,3,2,1};
       one(a);
     }
-  	{
-  		//ascending
-  		int N = 1000 ;
-  		int [] a = u.generateNumberInIncreasingOrder(N,1);
-  		one(a) ;
-  	}
-  	{
-  		//descending
-  		int N = 1000 ;
-  		int [] a = u.generateNumberInDescendingOrder(N,1);
-  		one(a) ;
-  	}
+//  	{
+//  		//ascending
+//  		int N = 1000 ;
+//  		int [] a = u.generateNumberInIncreasingOrder(N,1);
+//  		one(a) ;
+//  	}
+//  	{
+//  		//descending
+//  		int N = 1000 ;
+//  		int [] a = u.generateNumberInDescendingOrder(N,1);
+//  		one(a) ;
+//  	}
   }
   
   private void random() {

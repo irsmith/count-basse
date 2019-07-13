@@ -81,13 +81,16 @@ class Stock1 extends Stock1Base{
 	int[] recur(int lo, int hi) {
         if (lo>hi) throw  new RuntimeException("lo is greater than hi");
         int mid = lo + ((hi-lo)/2);
-        //System.out.printf("RECUR sz=%d lo=%d hi=%d mid=%d %n",size(),lo,hi, mid);
+        System.out.printf("RECUR sz=%d lo=%d hi=%d mid=%d %n",size(),lo,hi, mid);
 
         if (lo==hi) {
             return new int[]{lo,lo}; //base case
         }
         numSteps++;
 
+        if (numSteps > 100) {
+            System.out.printf("");
+        }
         int rv[] = new int[2];
 		int buyLowLeft = min(lo,mid);
 		int sellHiRight = max(mid+1, hi);
