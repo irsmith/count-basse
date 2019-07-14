@@ -13,7 +13,7 @@ class Hop extends HopBase{
 	//You cannot have any functions or data here
 	Hop() {
 		//NOTHING CAN BE CHANGED HERE
-		testBench();
+		//testBench();
 	}
 	
 	@Override
@@ -33,23 +33,20 @@ class Hop extends HopBase{
 	 *  
 	 */
 
-	// hopsmart is the recursive version of hop regular.
-    // base case is if s[x]=x then we found it
-    // To maintain the published API, external vars are stored (and cleared).
-    int target = 0;
-    int level = 0;
+	// returns COUNT of times executed to find target
+
     int alg(int [] s, int x) {
-	    if (level==0){
-	        target=x;
+
+        if (s[x] == x ) {
+            return 0;
         }
-        if (s[x] == target ) {
-	        target=0;
-	        int tmp=level;
-	        level=0;
-            return tmp;
-        }
-        level++;
-        return alg(s, s[x]);
+
+        //swap s[x] amd s[s[x]]
+        int tmp = s[x];
+        s[x] = s[tmp];
+        s[tmp] = tmp;
+
+        return 1+ alg(s, s[x]);
 	}
 
 
