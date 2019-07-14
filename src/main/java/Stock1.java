@@ -58,6 +58,11 @@ class Stock1 extends Stock1Base{
 	}
 	
 	/*
+	maximum sum subarray
+	https://en.wikipedia.org/wiki/Maximum_subarray_problem
+	https://www.youtube.com/watch?v=ohHWQf1HDfU
+
+	//https://stackoverflow.com/questions/7086464/maximum-single-sell-profit
 	 * Time: O(nlogn)
 	 * Space: O(logn)
 	 * side effect : updates numSteps, buyDay and sellDay
@@ -81,16 +86,14 @@ class Stock1 extends Stock1Base{
 	int[] recur(int lo, int hi) {
         if (lo>hi) throw  new RuntimeException("lo is greater than hi");
         int mid = lo + ((hi-lo)/2);
-        System.out.printf("RECUR sz=%d lo=%d hi=%d mid=%d %n",size(),lo,hi, mid);
+        //System.out.printf("RECUR steps:%d sz=%d lo=%d hi=%d mid=%d %n",numSteps, size(),lo,hi, mid);
 
         if (lo==hi) {
             return new int[]{lo,lo}; //base case
         }
         numSteps++;
 
-        if (numSteps > 100) {
-            System.out.printf("");
-        }
+
         int rv[] = new int[2];
 		int buyLowLeft = min(lo,mid);
 		int sellHiRight = max(mid+1, hi);
@@ -100,7 +103,7 @@ class Stock1 extends Stock1Base{
 		}
 		int crossProfit = profit(sellHiRight, buyLowLeft);
 
-		int leftBS[] = recur(0,mid);
+		int leftBS[] = recur(lo,mid);
 		int rightBS[] = recur(mid+1, hi);
 
 		int leftProfit = profit(leftBS[1], leftBS[0]);
@@ -112,16 +115,18 @@ class Stock1 extends Stock1Base{
 			sellDay = sellHiRight;
 			rv[0]=buyLowLeft;
 			rv[1]=sellHiRight;
-		} else if ((rightProfit > crossProfit)  && (rightProfit > leftProfit)) {
+		} else if (rightProfit >= leftProfit) {
             // right fragment wins.
             rv[0]=rightBS[0];
             rv[1]=rightBS[1];
 
-		} else {
+		} else if ((leftProfit > rightProfit)) {
             // left fragment wins.
             rv[0]=leftBS[0];
             rv[1]=leftBS[1];
-		}
+		}  else {
+		    throw new IllegalArgumentException("illegal!"); //todo use util
+        }
 		return  rv;
 	}
 
