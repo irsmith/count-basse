@@ -13,7 +13,7 @@ class Hop extends HopBase{
 	//You cannot have any functions or data here
 	Hop() {
 		//NOTHING CAN BE CHANGED HERE
-		//testBench();
+		testBench();
 	}
 	
 	@Override
@@ -33,20 +33,15 @@ class Hop extends HopBase{
 	 *  
 	 */
 
-	// returns COUNT of times executed to find target
-
     int alg(int [] s, int x) {
-
-        if (s[x] == x ) {
+        int[] b = s.clone();
+        if (b[x] == x ) {
             return 0;
         }
-
-        //swap s[x] amd s[s[x]]
-        int tmp = s[x];
-        s[x] = s[tmp];
-        s[tmp] = tmp;
-
-        return 1+ alg(s, s[x]);
+        int tmp = b[x];
+        b[x] = b[tmp];
+        b[tmp] = tmp;
+        return 1 + alg(b, b[x]);
 	}
 
 
