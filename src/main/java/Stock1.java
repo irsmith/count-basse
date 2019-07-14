@@ -93,7 +93,6 @@ class Stock1 extends Stock1Base{
         }
         numSteps++;
 
-
         int rv[] = new int[2];
 		int buyLowLeft = min(lo,mid);
 		int sellHiRight = max(mid+1, hi);
@@ -101,31 +100,38 @@ class Stock1 extends Stock1Base{
 		if  (sellHiRight < buyLowLeft) {
 			throw new IllegalArgumentException("sell idx must be > = buy idx");
 		}
-		int crossProfit = profit(sellHiRight, buyLowLeft);
 
 		int leftBS[] = recur(lo,mid);
 		int rightBS[] = recur(mid+1, hi);
 
-		int leftProfit = profit(leftBS[1], leftBS[0]);
+		// our recursion provides the max and min.
+        assert(buyLowLeft == leftBS[0]);
+        assert(sellHiRight == rightBS[1]);
+
+        int crossProfit = profit(sellHiRight, buyLowLeft);
+        int crossProfit2 = profit(rightBS[1], leftBS[0]);
+        assert(crossProfit2 == crossProfit);
+
+
+        int leftProfit = profit(leftBS[1], leftBS[0]);
 		int rightProfit = profit(rightBS[1], rightBS[0]);
 		//total profit is choice of 3 situations: left-only, right-only or cross
 		if ((crossProfit > leftProfit) && (crossProfit > rightProfit)){
 			//cross wins.  Buy low sell hi
-			buyDay = buyLowLeft;
-			sellDay = sellHiRight;
 			rv[0]=buyLowLeft;
 			rv[1]=sellHiRight;
 		} else if (rightProfit >= leftProfit) {
             // right fragment wins.
             rv[0]=rightBS[0];
             rv[1]=rightBS[1];
-
+            assert(sellHiRight == rightBS[1]);
 		} else if ((leftProfit > rightProfit)) {
             // left fragment wins.
             rv[0]=leftBS[0];
             rv[1]=leftBS[1];
+            assert(buyLowLeft == leftBS[0]);
 		}  else {
-		    throw new IllegalArgumentException("illegal!"); //todo use util
+            u.myassert(false);
         }
 		return  rv;
 	}
@@ -136,6 +142,7 @@ class Stock1 extends Stock1Base{
 		int minIndex = lo;
 		int i=lo;
 		while (i<=hi) {
+		    numSteps++;
 			if (price(i) < minValue) {
 				minValue = price(i);
 				minIndex = i;
@@ -153,6 +160,7 @@ class Stock1 extends Stock1Base{
 		int maxInx = lo;
 		int i=lo;
 		while (i<=hi){
+		    numSteps++;
 		    if (price(i) > maxValue) {
 		        maxValue = price(i);
 		        maxInx = i;

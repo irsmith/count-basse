@@ -33,12 +33,27 @@ class Hop extends HopBase{
 	 *  
 	 */
 
-	private int alg(int [] s, int x) {
-		//WRITE CODE
-		//If your code is more than 10 lines, you don't understand the problem
-		return Integer.MIN_VALUE;
+	// hopsmart is the recursive version of hop regular.
+    // base case is if s[x]=x then we found it
+    // To maintain the published API, external vars are stored (and cleared).
+    int target = 0;
+    int level = 0;
+    int alg(int [] s, int x) {
+	    if (level==0){
+	        target=x;
+        }
+        if (s[x] == target ) {
+	        target=0;
+	        int tmp=level;
+	        level=0;
+            return tmp;
+        }
+        level++;
+        return alg(s, s[x]);
 	}
-	
+
+
+
 	public static void main(String[] args) {
 		//NOTHING CAN BE CHANGED HERE
 		System.out.println("Hop problem STARTS");

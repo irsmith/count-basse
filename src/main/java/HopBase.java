@@ -25,8 +25,8 @@ abstract class HopBase{
   	random() ;
 	}	
   
-  private int hopEasy(int [] s, int x) {
-  	int l = 0 ;
+   int hopEasy(int [] s, int x) {
+        int l = 0 ;
 		int gx = x ;
 		while (true) {
 			if (s[x] == gx) {
@@ -38,7 +38,7 @@ abstract class HopBase{
   }
 
   private void one(int [] s, int j, int [] b) {
-  	System.out.println("---------------------------------------");
+  		System.out.println("---------------------------------------");
 		int y = hopEasy(s,j) ;
 		System.out.println("hopEasy y = " + y);
 		int x = hopSmart(s,j) ;
@@ -50,7 +50,7 @@ abstract class HopBase{
   }
 
   private void basic() {
-  	int s[] = {5,1,0,4,2,3} ;
+	    int s[] = {5,1,0,4,2,3} ;
 		int b[] = {5,1,0,4,2,3} ;
 		one(s,3,b) ;
 		int l = s.length ;
