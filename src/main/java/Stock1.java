@@ -12,6 +12,8 @@
 class Stock1 extends Stock1Base{
 	//You can have any number of private data members here
 	//You can have any number of private functions here
+    IntUtil u = new IntUtil();
+
 	Stock1() {
 		//NOTHING CAN BE CHANGED HERE
 		testBench();
@@ -81,55 +83,36 @@ class Stock1 extends Stock1Base{
 		sellDay = tot[1];
 	}
 
-	// return int[0] BUYlow day an int[1] SELLhi day
-	// or return idx[0,1] of indices for highest profit?
+
 	int[] recur(int lo, int hi) {
-        if (lo>hi) throw  new RuntimeException("lo is greater than hi");
-        int mid = lo + ((hi-lo)/2);
-        //System.out.printf("RECUR steps:%d sz=%d lo=%d hi=%d mid=%d %n",numSteps, size(),lo,hi, mid);
+        u.myassert(lo<=hi);
 
         if (lo==hi) {
-            return new int[]{lo,lo}; //base case
+            return new int[]{lo,lo};
         }
         numSteps++;
 
-        int rv[] = new int[2];
-		int buyLowLeft = min(lo,mid);
-		int sellHiRight = max(mid+1, hi);
-
-		if  (sellHiRight < buyLowLeft) {
-			throw new IllegalArgumentException("sell idx must be > = buy idx");
-		}
-
+        // todo - our recursion provides the max and min can optimize
+        int mid = lo + ((hi-lo)/2);
 		int leftBS[] = recur(lo,mid);
 		int rightBS[] = recur(mid+1, hi);
 
-		// our recursion provides the max and min.
-        assert(buyLowLeft == leftBS[0]);
-        assert(sellHiRight == rightBS[1]);
-
+        int buyLowLeft = min(lo,mid);
+        int sellHiRight = max(mid+1, hi);
         int crossProfit = profit(sellHiRight, buyLowLeft);
-        int crossProfit2 = profit(rightBS[1], leftBS[0]);
-        assert(crossProfit2 == crossProfit);
-
 
         int leftProfit = profit(leftBS[1], leftBS[0]);
 		int rightProfit = profit(rightBS[1], rightBS[0]);
-		//total profit is choice of 3 situations: left-only, right-only or cross
-		if ((crossProfit > leftProfit) && (crossProfit > rightProfit)){
-			//cross wins.  Buy low sell hi
+        int rv[] = new int[2];
+        if ((crossProfit > leftProfit) && (crossProfit > rightProfit)){
 			rv[0]=buyLowLeft;
 			rv[1]=sellHiRight;
 		} else if (rightProfit >= leftProfit) {
-            // right fragment wins.
             rv[0]=rightBS[0];
             rv[1]=rightBS[1];
-            assert(sellHiRight == rightBS[1]);
 		} else if ((leftProfit > rightProfit)) {
-            // left fragment wins.
             rv[0]=leftBS[0];
             rv[1]=leftBS[1];
-            assert(buyLowLeft == leftBS[0]);
 		}  else {
             u.myassert(false);
         }
@@ -149,9 +132,6 @@ class Stock1 extends Stock1Base{
 			}
 			i++;
 		}
-        if (minIndex >= size()) {
-            throw new IllegalArgumentException("max idx too hi");
-        }
 		return minIndex;
 	}
 
@@ -166,9 +146,6 @@ class Stock1 extends Stock1Base{
 		        maxInx = i;
             }
             i++;
-        }
-        if (maxInx >= size()) {
-		    throw new IllegalArgumentException("max idx too hi");
         }
 		return maxInx;
 	}
