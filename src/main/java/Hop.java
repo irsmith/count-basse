@@ -34,14 +34,17 @@ class Hop extends HopBase{
 	 */
 
     int alg(int [] s, int x) {
-        int[] b = s.clone();
-        if (b[x] == x ) {
+
+        if (s[x] == x ) {
             return 0;
         }
-        int tmp = b[x];
-        b[x] = b[tmp];
-        b[tmp] = tmp;
-        return 1 + alg(b, b[x]);
+
+        // mutate array as we recur
+        int tmp = s[x];   //value of array at x
+        s[x] = s[tmp];
+        int rv = 1 + alg(s, s[x]);
+        s[x] = tmp;  //restore at the unwind
+        return rv;
 	}
 
 
